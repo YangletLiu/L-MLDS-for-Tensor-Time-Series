@@ -18,15 +18,15 @@ model = ten2vec(model);
 Xtrain = X(:,1:Ntrain);
 Xtest = X(:,[1:Ntest]+Ntrain);
 
-% estimate
-[mu V P ] = forward(Xtrain, model);
+% estimate Ez{Ntrain}
+[mu V P] = forward(Xtrain, model);
 [Ez Ezz Ez1z] = backward(mu, V, P, model);
 model.mu0 = model.A*Ez{Ntrain};
-[ZEst ZZEst P] = forward(Xtest, model);
-XEst = zeros(p,Ntest);
-for i = 1:Ntest
-  XEst(:,i) = model.C*ZEst{i};
-end
+
+%1. estimate ZEst(:,n) with the sequence[X(:,1)...X(:,n-1)].
+%2. estimate XEst(:,n)=model.C*ZEst(:,n).
+%3. run 1 and 2 alternatively, we can obtain the estimation of Xtest.
+XEst=Estimate(Xtest,model);
 
 % error
 D = zeros(Ntest,1);

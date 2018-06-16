@@ -20,8 +20,4 @@ Xtest = X(:,[1:Ntest]+Ntrain);
 [mu V P ] = forward(Xtrain, model);
 [Ez Ezz Ez1z] = backward(mu, V, P, model);
 model.mu0 = model.A*Ez{Ntrain};
-[ZEst ZZEst P ] = forward(Xtest, model);
-D = zeros(p,Ntest);
-for i = 1:Ntest
-  D(:,i) = model.C*ZEst{i};
-end
+D=Estimate(Xtest,model);
