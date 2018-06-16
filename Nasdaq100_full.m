@@ -38,7 +38,7 @@ end
 for i = 1:I(2)
   sizes(i) = L_number_of_parameters(XX,I(2), i,Type);
 end
-J_lmlds = find(sizes >= number_of_parameters(I, J,Type),1)-1;
+J_lmlds = find(sizes >= number_of_parameters(I, J,Type),1);
 if isempty(J_lmlds)
     J_lmlds=I(2);
 end

@@ -66,7 +66,7 @@ subplot(1,1,1);
 hold on;
 T = [1:Ntest]+Ntrain; 
 plot(T, err_lds, 'Color', 'blue');
-%plot(T, err_mlds, 'Color', 'black');
+plot(T, err_mlds, 'Color', 'black');
 plot(T, err_dft, 'Color', 'yellow');
 plot(T, err_dct, 'Color', 'red');
 plot(T, err_dwt, 'Color', 'green');
