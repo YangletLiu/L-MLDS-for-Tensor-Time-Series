@@ -1,4 +1,4 @@
-# L-MDS-for-Tensor-Time-Series
+# L-MLDS-for-Tensor-Time-Series
 L-MDS modeling;  Tensor time series prediction
 
 The folder named 'data' contains the datasets.
