@@ -38,7 +38,7 @@ for i = 1:N
 %     invSig = invR - invRC * ((inv(KP) + invCRC) \ invRC');    
   else
     sigma_c = model.C * KP * model.C' + model.R;
-    invSig = inv(sigma_c);
+    invSig = pinv(sigma_c);
     %invSig = inv(sigma_c);
   end
   K = KP * model.C' * invSig;
