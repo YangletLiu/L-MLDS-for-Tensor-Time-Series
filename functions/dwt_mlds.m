@@ -1,4 +1,7 @@
-function result = dwt_mlds(A,J_lmlds,Ntrain,Type)
+function D = dwt_mlds( X,J_lmlds,Ntrain,Type)
+    N=numel(X);
+    A = Mydwt(X);
+%%
     I=size(A{1});
     N=numel(A);
     Ntest=N-Ntrain;
@@ -21,5 +24,13 @@ function result = dwt_mlds(A,J_lmlds,Ntrain,Type)
             result{j}(:,l)=A_lds{l}(:,j);
         end   
     end 
- end
+%%
+    C=inv_Mydwt(result);
+    I=size(X{1});
+    for i = 1:Ntest
+        for j=1:I(2)
+            D{i}(:,j)=C{i}(:,j);
+        end
+    end
+end
 

@@ -1,4 +1,4 @@
-function [result,model_dct] = dct_mlds(Y,J_lmlds,Ntrain,Type)
+function result = dct_mlds(Y,J_lmlds,Ntrain,Type)
     I=size(Y{1});
     N=numel(Y);
     for k=1:N
