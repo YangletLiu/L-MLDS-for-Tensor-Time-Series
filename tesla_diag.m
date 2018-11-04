@@ -27,12 +27,14 @@ clear i
 J_lds = find(sizes >= number_of_parameters(I, J,Type),1);
 clear i sizes
 model_lds = learn_mlds(subcell(X_vectorized, 1:Ntrain),Type, 'J',J_lds );
-err_lds = err(X, Ntrain, model_lds);
+result_lds = Generator(X, Ntrain, model_lds);
+err_lds=err(X, Ntrain, result_lds);
+Result_lds=ten_form(X,result_lds);
 
 
 %preprocess the dataset to fit L-MLDS well--------------------------------
 for i=1:N
-    XX{i}=X{i}';
+    XX{i}=X{i}'; 
 end
 %compute J----------------------------------------------------------------
 for i = 1:I(2)
@@ -43,30 +45,35 @@ if isempty(J_lmlds)
     J_lmlds=I(2);
 end
 %dct-MLDS-----------------------------------------------------------------
-[result,model_dct]= dct_mlds(XX,J_lmlds,Ntrain,Type);
-err_dct = Err_dct(XX,result,Ntrain);
+result_dct= dct_mlds(XX,J_lmlds,Ntrain,Type);
+err_dct = Err_dct(XX,result_dct,Ntrain);
 
 %dwt-MLDS-----------------------------------------------------------------
 
 J_dwt=J_lmlds;
-err_dwt = Err_dwt( XX,J_dwt,Ntrain,Type);
+result_dwt =dwt_mlds( XX,J_dwt,Ntrain,Type);
+err_dwt=Err_dct( XX,result_dwt,Ntrain);
+
 
 %dft-MLDS-----------------------------------------------------------------
 
-result1 = dft_mlds(XX,J_lmlds,Ntrain,Type);
-err_dft=Err_dct(XX,result1,Ntrain);
+result_dft = dft_mlds(XX,J_lmlds,Ntrain,Type);
+err_dft=Err_dct(XX,result_dft,Ntrain);
 
 % MLDS--------------------------------------------------------------------
 
 disp('Fitting MLDS with matching number of parameters...')
 J_mlds = prod(J);
 model_mlds = learn_mlds(subcell(X, 1:Ntrain),Type, 'J', J);
-err_mlds = err(X, Ntrain, model_mlds);
+result_mlds = Generator(X, Ntrain, model_mlds);
+err_mlds=err(X, Ntrain, result_mlds);
+Result_mlds=ten_form(X,result_mlds);
 
 
 
 % plot results------------------------------------------------------------
 disp('Plotting results...')
+figure(1)
 subplot(1,1,1);
 hold on;
 T = [1:Ntest]+Ntrain; 
@@ -77,6 +84,37 @@ plot(T, err_dct, 'Color', 'red');
 plot(T, err_dwt, 'Color', 'green');
 hold off;
 legend('LDS','MLDS','dft-MLDS','dct-MLDS','dwt-MLDS');
+xlim([1 Ntest] + Ntrain);
+xlabel('Time slice');
+ylabel('Error');
+
+figure(2)
+real_lds=zeros(1,Ntest);
+real_mlds=zeros(1,Ntest);
+real_dct=zeros(1,Ntest);
+real_dwt=zeros(1,Ntest);
+real_dft=zeros(1,Ntest);
+real=zeros(1,Ntest);
+
+for i=1:Ntest
+    real_lds(i)  = Result_lds{i}(6,1);
+    real_mlds(i) = Result_mlds{i}(6,1);
+    real_dct(i)  = result_dct{i}(1,6);
+    real_dwt(i)  = result_dwt{i}(1,6);
+    real_dft(i)  = result_dft{i}(1,6);
+    real(i)      = X{i+Ntrain}(6,1); 
+end
+subplot(1,1,1);
+hold on;
+T = [1:Ntest]+Ntrain; 
+plot(T, real_lds, 'Color', 'blue');
+plot(T, real_mlds, 'Color', 'black');
+plot(T, abs(real_dft), 'Color', 'yellow');
+plot(T, real_dct, 'Color', 'red');
+plot(T, real_dwt, 'Color', 'green');
+plot(T, real, 'Color', 'cyan');
+hold off;
+legend('LDS','MLDS','dft-MLDS','dct-MLDS','dwt-MLDS','real');
 xlim([1 Ntest] + Ntrain);
 xlabel('Time slice');
 ylabel('Error');
