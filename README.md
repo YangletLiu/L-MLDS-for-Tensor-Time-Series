@@ -46,3 +46,9 @@ The prediction values for all datasets are saved as:
 	result_dwt.mat---------by dwt-MLDS
 	
 for checking.
+
+%-----------------------------------------------------------
+
+How to check a specific value in prediction result?
+
+Ans: If one wants to check a specific value in the output tensor series, please modify the tensor subscript. For example, 
