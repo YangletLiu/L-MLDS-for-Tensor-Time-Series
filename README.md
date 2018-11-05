@@ -28,16 +28,21 @@ Running the files named-
 to verify the results in paper.
 
 All the experiment parameters are set as described in the paper.
+
 %----------------------------------------------------------
+
 Experimental results are shown as prediction errors and prediction values.
 
 The prediction errors are shown in figure 1.
+
 The prediction values are shown in figure 2.
 
 The prediction values for all datasets are saved as:
+
         Result_lds.mat---------by LDS
 	Result_mlds.mat--------by MLDS
 	result_dct.mat---------by dct-MLDS
 	result_dft.mat---------by dft-MLDS
 	result_dwt.mat---------by dwt-MLDS
+	
 for checking.
