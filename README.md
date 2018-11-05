@@ -39,7 +39,7 @@ The prediction values are shown in figure 2.
 
 The prediction values for all datasets are saved as:
 
-        Result_lds.mat---------by LDS
+       Result_lds.mat---------by LDS
 	Result_mlds.mat--------by MLDS
 	result_dct.mat---------by dct-MLDS
 	result_dft.mat---------by dft-MLDS
