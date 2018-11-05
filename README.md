@@ -51,4 +51,32 @@ for checking.
 
 How to check a specific value in prediction result?
 
-Ans: If one wants to check a specific value in the output tensor series, please modify the tensor subscript. For example, 
+Ans: If one wants to check a specific value in the output tensor series, please modify the tensor subscript in the following program (which is used to draw the prediction trend in each matlab file described above):
+
+%% Prediction value------------------------------------------------------------
+
+figure(2)
+
+real_lds=zeros(1,Ntest);
+
+real_mlds=zeros(1,Ntest);
+
+real_dct=zeros(1,Ntest);
+
+real_dwt=zeros(1,Ntest);
+
+real_dft=zeros(1,Ntest);
+
+real=zeros(1,Ntest);
+
+for i=1:Ntest
+
+    real_lds(i)  = Result_lds{i}(1,2);               % modify the subscript here
+    real_mlds(i) = Result_mlds{i}(1,2);              % modify the subscript here
+    real_dct(i)  = result_dct{i}(1,2);               % modify the subscript here
+    real_dwt(i)  = result_dwt{i}(1,2);               % modify the subscript here
+    real_dft(i)  = result_dft{i}(1,2);               % modify the subscript here
+    real(i)      = X{i+Ntrain}(1,2);                 % modify the subscript here
+end
+
+%% ------------------------------------------------------------------------------
