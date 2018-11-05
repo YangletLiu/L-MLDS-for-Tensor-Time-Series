@@ -68,6 +68,8 @@ Result_mlds=ten_form(X,result_mlds);
 
 % plot results------------------------------------------------------------
 disp('Plotting results...')
+
+%% Error
 figure(1)
 subplot(1,1,1);
 hold on;
@@ -83,6 +85,7 @@ xlim([1 Ntest] + Ntrain);
 xlabel('Time slice');
 ylabel('Error');
 
+%% Prediction value
 figure(2)
 real_lds=zeros(1,Ntest);
 real_mlds=zeros(1,Ntest);
@@ -112,5 +115,5 @@ hold off;
 legend('LDS','MLDS','dft-MLDS','dct-MLDS','dwt-MLDS','real');
 xlim([1 Ntest] + Ntrain);
 xlabel('Time slice');
-ylabel('Error');
+ylabel('Temperature');
 
