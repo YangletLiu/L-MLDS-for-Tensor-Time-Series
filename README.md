@@ -80,3 +80,9 @@ for i=1:Ntest
 end
 
 %% ------------------------------------------------------------------------------
+
+We provide the 4D L-MLDS model with discrete cosine transform.
+
+Run test_4D.m to check the prediction results.
+
+The results are shown as prediction trends in Figure(1), to check different stocks please do as described above.
