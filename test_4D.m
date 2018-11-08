@@ -1,6 +1,6 @@
-addpath('functions');
+addpath('functions_4D');
 % data
-load tesla5_7
+load tesla_4D
 N = numel(X);
 Ntrain =150;
 
